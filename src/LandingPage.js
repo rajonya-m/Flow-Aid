@@ -54,11 +54,11 @@ const LandingPage = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1 style={{ color: "#1a73e8" }}>FlowAid - Disaster Response</h1>
+    <div style={{ textAlign: "center", padding: "20px", backgroundColor: "#faf9f6" }}>
+      <h1 style={{ color: "#0f4662", fontSize: "24px" }}>Aiding menstrual hygiene by connecting volunteers, NGOs, and government agencies for rapid, coordinated disaster relief</h1>
 
       {/* Disaster Alerts Section */}
-      <div style={{ background: "#fff3cd", padding: "10px", marginBottom: "20px" }}>
+      <div style={{ background: "#ADD8E6", padding: "10px", marginBottom: "45px", borderRadius: "50px", width: "50%", margin: "auto" }}>
         <h2>Disaster Alerts</h2>
         {alerts.map(alert => (
           <p key={alert.id}><strong>{alert.location}:</strong> {alert.severity} Alert</p>

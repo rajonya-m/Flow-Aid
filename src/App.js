@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar"; // Import Navbar from second code
 import LandingPage from "./LandingPage";
 import DonorLogin from "./DonorLogin";
 import VolunteerLogin from "./VolunteerLogin";
@@ -11,6 +12,7 @@ import InteractiveMapPage from "./InteractiveMapPage"; // Import InteractiveMap 
 const App = () => {
   return (
     <Router>
+      <Navbar /> {/* Navbar added from the second code */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/add-disaster" element={<AddDisaster />} />
