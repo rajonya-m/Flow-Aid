@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const VolunteerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegister, setIsRegister] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
+      if (email === "" || password === "") {
+        setErrorMessage("Please fill in both fields.");
+        return;
+      }
+      setErrorMessage(""); // Clear error message
+
       if (isRegister) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -22,13 +31,15 @@ const VolunteerLogin = () => {
         });
 
         alert("Volunteer registered successfully!");
+        navigate("/interactive-map"); // Redirect to map page
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         alert("Volunteer logged in successfully!");
+        navigate("/interactive-map"); // Redirect to map page
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(error.message);
+      setErrorMessage(error.message);
     }
   };
 
@@ -41,16 +52,21 @@ const VolunteerLogin = () => {
         <input
           type="email"
           placeholder="Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
         />
         <input
           type="password"
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={styles.input}
         />
       </div>
+
+      {/* Error Message */}
+      {errorMessage && <p style={styles.errorMessage}>{errorMessage}</p>}
       
       {/* Submit Button */}
       <button onClick={handleSubmit} style={styles.button}>
@@ -110,6 +126,11 @@ const styles = {
     color: "#1a73e8",
     cursor: "pointer",
     textDecoration: "underline",
+  },
+  errorMessage: {
+    color: "red",
+    fontSize: "14px",
+    marginBottom: "10px",
   },
 };
 

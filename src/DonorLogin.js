@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const DonorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegister, setIsRegister] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -29,9 +31,11 @@ const DonorLogin = () => {
         });
 
         alert("Donor registered successfully!");
+        navigate("/interactive-map"); // Redirect to the map page
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         alert("Donor logged in successfully!");
+        navigate("/interactive-map"); // Redirect to the map page
       }
     } catch (error) {
       console.error("Error:", error);

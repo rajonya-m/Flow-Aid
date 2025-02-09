@@ -6,6 +6,7 @@ import VolunteerLogin from "./VolunteerLogin";
 import NGOLogin from "./NGOLogin";
 import DisasterMap from "./DisasterMap"; // Map with disaster zones, NGOs, and distance
 import AddDisaster from "./AddDisaster"; // Import AddDisaster component
+import InteractiveMapPage from "./InteractiveMapPage"; // Import InteractiveMap component
 
 const App = () => {
   return (
@@ -17,10 +18,10 @@ const App = () => {
         <Route path="/volunteers" element={<VolunteerLogin />} />
         <Route path="/ngo" element={<NGOLogin />} />
         <Route path="/disaster-map" element={<DisasterMap />} />
+        <Route path="/interactive-map" element={<InteractiveMapPage />} /> {/* Interactive map route */}
       </Routes>
     </Router>
   );
 };
 
 export default App;
-
